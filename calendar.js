@@ -87,12 +87,14 @@ date.prototype.createTd = function(){
 	this.rowNum = Math.ceil(this.days/7);                                              //设置行数
 
 	//上一月
-	this.prevDays = new Date(this.settings.year,this.settings.month-1,0).getDate(); 
-	if ( this.settings.month == 1 ) {
-		this.settings.month = 13;
-		this.settings.year-=1;
+	var prevYear = this.settings.year;
+	var prevMonth = this.settings.month-1;
+	this.prevDays = new Date(prevYear,prevMonth,0).getDate(); 
+	if ( prevMonth < 1 ) {
+		prevMonth = 12;
+		prevYear-=1;
 	}
-	console.log(this.settings.year,this.settings.month-1)
+	console.log(prevYear,prevMonth)
 	
 	if ( this.rowNum*7-this.n >= this.days ) {
 		this.rowNum = Math.ceil(this.days/7);
