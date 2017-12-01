@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{box-sizing:border-box;}
+	.day{width: 700px;margin: 0 auto;}
+	.date{width: 100%;table-layout: fixed;border-collapse: collapse;}
+	.date td{border:1px solid #ccc;height: 45px;font-size: 16px;color: #333;text-align: center;}
+	.date td.on{background: red;color: #fff;}
+	.date th{font-size: 16px;height: 45px;}
+	.date_act{position: relative;padding: 0 60px;height: 60px;line-height: 60px;text-align: center;}
+	.date_act_btn{position: absolute;width: 60px;height: 60px;text-decoration: none;top: 0;background-color: #f7f7f7;}
+	.date_prev{left: 0;}
+	.date_next{right: 0;}
+	.date_date input{width: 50px;}
+	</style>
+</head>
+<body>
+
+
+	<div class="day" id="day">
+	
+		<!-- <div class="date_act">
+			<a class="date_act_btn date_prev" href="javascript:;"><</a>
+			<div class="date_date"><input id="date_year" type="text" value="2017">年<input id="date_month" type="text" value="12">月<button id="dateconfirm">确定</button></div>
+			<a class="date_act_btn date_next" href="javascript:;">></a>
+		</div>
+		<table class="date">
+			<thead>
+				<tr id="dateHead"></tr>
+			</thead>
+			<tbody id="dateTime"></tbody>
+		</table> -->
+	</div>
+	<div class="day" id="day2"></div>
+
+	<script src="calendar.js"></script>
+
+	<!-- <script>
+		window.onload=function(){
+			//var year = 2017;
+			//var month = 11;
+			
+			var oparent = document.querySelector('.day');
+			/*oparent.innerHTML = '<div class="date_act"><a class="date_act_btn date_prev" href="javascript:;"><</a><div class="date_date"><input id="date_year" type="text" value="2017">年<input id="date_month" type="text" value="12">月<button id="dateconfirm">确定</button></div><a class="date_act_btn date_next" href="javascript:;">></a></div>';*/
+	
+			var dateTime = document.querySelector('#dateTime');
+			var dateHead = document.querySelector('#dateHead');
+			var nextMonth = document.querySelector('.date_next');
+			var prevMonth = document.querySelector('.date_prev');
+			var oYear = document.querySelector('#date_year');
+			var oMonth = document.querySelector('#date_month');
+			var dateconfirm = document.querySelector('#dateconfirm');
+			var week = ["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
+	
+			var year = oYear.value;
+			var month = oMonth.value;
+	
+			
+			//  设置头部
+			for (var i = 0; i < week.length; i++) {
+				var th = document.createElement("th");
+				th.innerHTML = week[i];
+				dateHead.appendChild(th)
+			}
+			
+	
+			init();
+	
+			nextMonth.onclick = function(){
+				month ++;
+				if ( month >12 ) {
+					month = 1;
+					year ++;
+				}
+				oYear.value = year;
+				oMonth.value = month;
+				console.log(year,month)
+				init();
+			}
+			prevMonth.onclick = function(){
+				month --;
+				if ( month < 1 ) {
+					month = 12;
+					year --;
+				}
+				oYear.value = year;
+				oMonth.value = month;
+				init();
+			}
+			dateconfirm.onclick = function(){
+				reDate()
+				init();
+			}
+	
+			oYear.onkeydown = function(){
+				keyDate()
+			}
+			oMonth.onkeydown = function(){
+				keyDate()
+			}
+	
+			function keyDate(){
+				if(event.keyCode==13){
+			        year = oYear.value;
+					month = oMonth.value;
+					init();                            
+			    }
+			}
+	
+			function init(){
+				dateTime.innerHTML = '';
+				
+				var days = new Date(year,month,0).getDate();
+				var n = new Date(""+year+","+month+",1").getDay();
+				var rowNum = Math.ceil(days/7);
+	
+				if ( rowNum*7-n >= days ) {
+					rowNum = Math.ceil(days/7);
+				}else{
+					rowNum = Math.ceil(days/7)+1;
+				}
+				
+				for (var i = 0; i < rowNum; i++) {
+					var tr = document.createElement("tr");
+					for (var j = 0; j < 7; j++) {
+						var td = document.createElement("td");
+						var num = i*7+j-(n-1);
+						if ( num<1 || num>days ) {
+							td.innerHTML = ''
+						}else{
+							td.innerHTML = num;
+						}
+						
+						tr.appendChild(td);
+					}
+					dateTime.appendChild(tr);
+				}
+			}
+		}
+	</script> -->
+</body>
+</html>
